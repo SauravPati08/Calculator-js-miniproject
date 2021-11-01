@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Calculator</title>
+	<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+</head>
+
+<style type="text/css">
+	body{
+		background: #8E0E00;  /* fallback for old browsers */
+		background: -webkit-linear-gradient(to right, #1F1C18, #8E0E00);  /* Chrome 10-25, Safari 5.1-6 */
+		background: linear-gradient(to right, #1F1C18, #8E0E00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	}
+	#container{
+		max-width: 500px;
+		margin: auto;
+		background-color: white;
+		padding-bottom: 20px;
+		border: 2px black solid;
+	}
+
+	.row{
+		width: 95%;
+		margin: auto;
+		margin-bottom: 10px;
+	}
+
+	#result{
+		height: 100px;
+		font-size: 100px;
+		margin-bottom: 10px;
+		margin-right: 10px;
+		text-align: right;
+	}
+
+	.btn{
+		width: 23%;
+		height: 100px;
+		color: #e2e2e2;
+		font-size: 20px;
+		color: black;
+		cursor: pointer;
+		margin-right: 5px;
+	}
+	.btn:hover{
+		background: #696969;
+	}
+</style>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		var digits = ['0','1','2','3','4','5','6','7','8','9'];
+		var operators = ['+','-','*','/'];
+		var btn_text;
+		var result;
+		var first_num, second_num;
+		var sign;
+
+		$('.btn').click(function(){
+			btn_text = $(this).text();
+			// alert(btn_text);
+
+			if(digits.includes(btn_text)){
+				result = $('#result').text();
+				$('#result').text(result + btn_text);
+			}
+
+			if(btn_text === 'C'){
+				$('#result').text('');
+			}
+
+			if(operators.includes(btn_text)){
+				// store the 1st number
+				first_num = $('#result').text();
+				// clear the screen
+				$('#result').text('');
+				// store the operator
+				sign = btn_text;
+			}
+
+			if(btn_text === '='){
+				second_num = $('#result').text();
+
+				if(sign === '+'){
+					$('#result').text(Number(first_num) + Number(second_num));
+				}else if(sign === '-'){
+					$('#result').text(Number(first_num) - Number(second_num));
+				}else if(sign === '*'){
+					$('#result').text(Number(first_num) * Number(second_num));
+				}else if(sign === '/'){
+					$('#result').text(Number(first_num) / Number(second_num));
+				}
+			}
+		})
+	})
+</script>
+
+<body>
+
+	<div id="container">
+		<div id="result">
+			
+		</div>
+
+		<div id="btn_area">
+			<div class="row">
+				<button class="btn">1</button>
+				<button class="btn">2</button>
+				<button class="btn">3</button>
+				<button class="btn">+</button>
+			</div>
+
+			<div class="row">
+				<button class="btn">4</button>
+				<button class="btn">5</button>
+				<button class="btn">6</button>
+				<button class="btn">-</button>
+			</div>
+
+			<div class="row">
+				<button class="btn">7</button>
+				<button class="btn">8</button>
+				<button class="btn">9</button>
+				<button class="btn">*</button>
+			</div>
+
+			<div class="row">
+				<button class="btn">C</button>
+				<button class="btn">0</button>
+				<button class="btn">=</button>
+				<button class="btn">/</button>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
